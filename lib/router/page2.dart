@@ -8,15 +8,15 @@ class The2Page extends StatelessWidget {
           Text('Page2'),
           ElevatedButton(
             child: Text('Page1'),
-            onPressed: () => ctx.pushRoute(The1Route()),
+            onPressed: () => ctx.navigateTo(The1Route()),
           ),
           ElevatedButton(
             child: Text('Page3'),
-            onPressed: () => ctx.pushRoute(The3Route()),
+            onPressed: () => ctx.navigateTo(The3Route()),
           ),
           ElevatedButton(
             child: Text('Page4'),
-            onPressed: () => ctx.pushRoute(The4Route()),
+            onPressed: () => ctx.navigateTo(The4Route()),
           ),
         ],
       );

@@ -1,17 +1,30 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:testing/router/router.gr.dart';
+import 'package:testing/store/app_store.dart';
 
 void main() {
+  final it = GetIt.I;
+
+  it.registerSingleton<AppStore>(AppStore());
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   final _appRouter = AppRouter();
 
+  final _appStore = GetIt.I.get<AppStore>();
+
   @override
   build(ctx) => MaterialApp.router(
         title: 'Flutter Demo',
-        routerDelegate: _appRouter.delegate(),
+        routerDelegate: AutoRouterDelegate.declarative(
+          _appRouter,
+          routes: (_) => [
+            if (_appStore.loggedIn) HomeRoute() else LoginRoute(),
+          ],
+        ),
         routeInformationParser: _appRouter.defaultRouteParser(),
       );
 }
